@@ -20,7 +20,6 @@ function ask(questions, index) {
 
 function main() {
   const questions = getQuestions();
-  console.log(questions.filter((question) => question.trim() !== ""))
   if (questions.every((question) => question.trim() === "")) {
     return;
   }
