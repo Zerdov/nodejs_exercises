@@ -10,7 +10,7 @@ function ask(questions, index) {
     process.exit();
   }
 
-  process.stdout.write(questions[index] + " ");
+  process.stdout.write(`${questions[index]} `);
 
   process.stdin.once("data", (answer) => {
     fs.appendFileSync("./z_answers.txt", `${questions[index]} -> ${answer.toString().trim()}\n`);
