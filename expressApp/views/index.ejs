@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Airbnb Search</title>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col items-center p-8">
+  <h1 class="text-4xl font-bold text-[#FF5A5F] mb-8">Airbnb Search</h1>
+  <form action="/search" method="POST"
+        class="bg-white shadow-md rounded-2xl p-6 w-full max-w-3xl space-y-4 border border-gray-100">
+    
+    <div class="grid md:grid-cols-2 gap-4">
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Maximum Price</span>
+        <input type="number" name="maxPrice" step="0.01"
+               value="<%= typeof maxPrice !== 'undefined' ? maxPrice : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Minimum Number of Guests</span>
+        <input type="number" name="minGuests" min="1"
+               value="<%= typeof minGuests !== 'undefined' ? minGuests : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Minimum Bedrooms</span>
+        <input type="number" name="minBedrooms" min="0"
+               value="<%= typeof minBedrooms !== 'undefined' ? minBedrooms : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Minimum Beds</span>
+        <input type="number" name="minBeds" min="0"
+               value="<%= typeof minBeds !== 'undefined' ? minBeds : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Country</span>
+        <input type="text" name="country" placeholder="e.g., Brazil"
+               value="<%= typeof country !== 'undefined' ? country : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+
+      <label class="flex flex-col">
+        <span class="text-sm font-medium text-gray-700 mb-1">Property Type</span>
+        <input type="text" name="propertyType" placeholder="e.g., Apartment"
+               value="<%= typeof propertyType !== 'undefined' ? propertyType : '' %>"
+               class="rounded-lg border-gray-300 focus:ring-2 focus:ring-[#FF5A5F] focus:outline-none px-3 py-2">
+      </label>
+    </div>
+
+    <button type="submit"
+            class="w-full md:w-auto mt-4 px-6 py-2.5 rounded-lg bg-[#FF5A5F] text-white font-semibold hover:bg-red-500 transition">
+      Search
+    </button>
+  </form>
+
+  <% if (results && results.length > 0) { %>
+    <div class="mt-10 w-full max-w-5xl">
+      <h2 class="text-2xl font-bold mb-4 text-[#FF5A5F]">Search Results &#149; <%= total %> <%= total === 1 ? "listing" : "listings" %></h2>
+      <div class="overflow-x-auto bg-white shadow-md rounded-xl">
+        <table class="min-w-full text-sm text-left">
+          <thead class="bg-[#FF5A5F] text-white uppercase text-xs">
+            <tr>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Price</th>
+              <th class="px-4 py-3">Guests</th>
+              <th class="px-4 py-3">Bedrooms</th>
+              <th class="px-4 py-3">Beds</th>
+              <th class="px-4 py-3">Country</th>
+              <th class="px-4 py-3">Property Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% results.forEach(listing => { %>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-4 py-3 font-medium"><%= listing.name %></td>
+                <td class="px-4 py-3">$<%= listing.price %></td>
+                <td class="px-4 py-3"><%= listing.accommodates %></td>
+                <td class="px-4 py-3"><%= listing.bedrooms %></td>
+                <td class="px-4 py-3"><%= listing.beds %></td>
+                <td class="px-4 py-3"><%= listing.address?.country %></td>
+                <td class="px-4 py-3"><%= listing.property_type %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } else if (results) { %>
+    <p class="mt-8 text-gray-500 text-lg">No listings found for the selected criteria.</p>
+  <% } %>
+</body>
+</html>
