@@ -1,1 +1,6 @@
 *.zip
+node_modules
+mongodb-nodejs-courses/data
+mongodb-nodejs-courses/archive
+.env
+bdd_test
