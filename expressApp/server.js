@@ -32,7 +32,6 @@ app.get('/', async (req, res) => {
 app.post('/search', async (req, res) => {
   try {
     const results = await searchListings(req.body, 10000);
-    console.log('Found', results.length, 'results');
     res.render('index', { results: results, total: results.length });
   } catch (err) {
     console.error(err);

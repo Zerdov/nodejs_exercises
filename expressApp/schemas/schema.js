@@ -19,7 +19,6 @@ const schemaListingsAndReviews = new Schema({
   number_of_reviews: Number
 });
 
-// On force le nom de la collection et on nomme le modèle "Listing"
 export const Listing = model(
   "Listing",
   schemaListingsAndReviews,
