@@ -20,9 +20,9 @@ app.set('views', './src/views');
 
 // Connexion MongoDB
 mongoose.connect(process.env.MONGO_URI, {
-  authSource: 'admin',
-  user: 'root',
-  pass: 'root',
+  authSource: process.env.AUTHSOURCE,
+  user: process.env.MONGO_USER,
+  pass: process.env.MONGO_PASSWORD,
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));

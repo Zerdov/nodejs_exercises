@@ -44,8 +44,12 @@ pnpm install
 4. Configurer le fichier `.env` avec :
 
 ```
-JWT_SECRET=ta_cle_secrete
-MONGO_URI=url_de_ta_bdd
+JWT_SECRET=
+MONGO_URI=
+MONGO_USER=
+MONGO_PASSWORD=
+AUTHSOURCE=
+PORT=
 ```
 
 5. Lancer le seed pour créer les utilisateurs :
